@@ -94,7 +94,7 @@ html_theme_options = {
 
 html_sidebars = {
     '**': [
-        #'about.html',
+        # 'about.html',
         'sidebar.html',
         # 'globaltoc.html',
 
@@ -112,7 +112,7 @@ htmlhelp_basename = 'GCPDS_filters_doc'
 autodoc_mock_imports = [
 
     'IPython',
-    
+
     # 'base_server.WSHandler_Serial',
     # 'base_server.WSHandler_WiFi',
     # 'ws.base_server',
@@ -136,15 +136,29 @@ html_sourcelink_suffix = ''
     # 'nbsphinx',
 # ]
 
-nbsphinx_execute_arguments = [
-    "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    "--InlineBackend.rc={'figure.dpi': 96}",
-]
+# nbsphinx_execute_arguments = [
+    # "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    # "--InlineBackend.rc={'figure.dpi': 96}",
+# ]
+
 
 nbsphinx_execute = 'never'
-# nbsphinx_input_prompt = 'In [%s]:'
-# nbsphinx_output_prompt = 'Out[%s]:'
+# nbsphinx_input_prompt = ' '
+# nbsphinx_output_prompt = ' '
 nbsphinx_kernel_name = 'python3'
+nbsphinx_prompt_width = '0'
+
+
+nbsphinx_prolog = """
+.. raw:: html
+
+    <style>
+        .nbinput .prompt,
+        .nboutput .prompt {
+            display: none;
+    }
+    </style>
+"""
 
 
 notebooks_dir = 'notebooks'
@@ -164,7 +178,7 @@ with open('index.rst', 'w') as file:
 .. include:: {notebooks_dir}/readme.rst
 
 Navigation
-^^^^^^^^^^
+----------
 
 .. toctree::
    :maxdepth: 2
@@ -174,7 +188,7 @@ Navigation
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

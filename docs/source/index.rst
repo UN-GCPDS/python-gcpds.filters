@@ -2,7 +2,7 @@
 .. include:: notebooks/readme.rst
 
 Navigation
-^^^^^^^^^^
+----------
 
 .. toctree::
    :maxdepth: 2
@@ -12,7 +12,7 @@ Navigation
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
