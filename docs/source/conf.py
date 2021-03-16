@@ -37,6 +37,11 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.todo',
     'IPython.sphinxext.ipython_console_highlighting',
+    
+
+    'nbsphinx',
+    'sphinx.ext.mathjax',
+    
 ]
 
 naoleon_google_docstring = False
@@ -112,6 +117,15 @@ htmlhelp_basename = 'GCPDS_filters_doc'
 autodoc_mock_imports = [
 
     'IPython',
+    'numpy',
+    'scipy',
+    'mne',
+    'matplotlib',
+    'google',
+    'colorama',
+    'tqdm',
+    'pandas',
+    'tables',
 
     # 'base_server.WSHandler_Serial',
     # 'base_server.WSHandler_WiFi',
@@ -136,18 +150,16 @@ html_sourcelink_suffix = ''
     # 'nbsphinx',
 # ]
 
-# nbsphinx_execute_arguments = [
-    # "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    # "--InlineBackend.rc={'figure.dpi': 96}",
-# ]
-
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc={'figure.dpi': 96}",
+]
 
 nbsphinx_execute = 'never'
-# nbsphinx_input_prompt = ' '
-# nbsphinx_output_prompt = ' '
+# nbsphinx_input_prompt = 'In [%s]:'
+# nbsphinx_output_prompt = 'Out[%s]:'
 nbsphinx_kernel_name = 'python3'
 nbsphinx_prompt_width = '0'
-
 
 nbsphinx_prolog = """
 .. raw:: html
@@ -165,16 +177,17 @@ notebooks_dir = 'notebooks'
 
 notebooks_list = os.listdir(os.path.join(
     os.path.abspath(os.path.dirname(__file__)), notebooks_dir))
+notebooks_list = filter(lambda s: not s.startswith('__'), notebooks_list)
 
 notebooks = []
 for notebook in notebooks_list:
-    if notebook != 'readme.ipynb' and notebook.endswith('.ipynb'):
+    if notebook not in ['readme.ipynb', 'license.ipynb'] and notebook.endswith('.ipynb'):
         notebooks.append(f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
 
-notebooks = sorted(notebooks)
+notebooks = '\n   '.join(sorted(notebooks))
 
 with open('index.rst', 'w') as file:
-    file.write("""
+    file.write(f"""
 .. include:: {notebooks_dir}/readme.rst
 
 Navigation
@@ -194,8 +207,9 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-    """.format(notebooks='\n   '.join(notebooks), notebooks_dir=notebooks_dir))
+    """)
 
 os.system("jupyter nbconvert --to rst notebooks/readme.ipynb")
 os.system("jupyter nbconvert --to markdown notebooks/readme.ipynb")
 os.system("mv notebooks/readme.md ../../README.md")
+

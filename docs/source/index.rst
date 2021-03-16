@@ -8,7 +8,7 @@ Navigation
    :maxdepth: 2
    :name: mastertoc
 
-   notebooks/frequency
+   notebooks/01-frequency
 
 
 Indices and tables
