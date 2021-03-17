@@ -107,11 +107,11 @@ class Filter(metaclass=ABCMeta):
         The option to use Gustaffson's method was added in scipy version 0.16.0.
         """
 
-        if axis is None:
-            if eeg.shape[0] > eeg.shape[1]:
-                axis = 0
-            else:
-                axis = 1
+        # if axis is None:
+            # if eeg.shape[0] > eeg.shape[1]:
+                # axis = 0
+            # else:
+                # axis = 1
 
         timestamp = np.array(timestamp)
 
@@ -133,7 +133,7 @@ class Filter(metaclass=ABCMeta):
     def _fit_fs(self, eeg=None, timestamp=None, fs=None):
         """Compile filters for new sample frequency."""
         if fs is None:
-            if isinstance(timestamp[-1], (int, float)):
+            if isinstance(timestamp[-1], (int, float, np.int64)):
                 delta = datetime.fromtimestamp(
                     timestamp[-1]) - datetime.fromtimestamp(timestamp[0])
             else:
