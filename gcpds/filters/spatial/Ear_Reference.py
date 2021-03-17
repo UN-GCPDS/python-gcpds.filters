@@ -1,1 +1,1 @@
-# tandard ear-reference
+# tandard ear-reference cambiod e referencia
