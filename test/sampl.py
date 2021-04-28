@@ -1,18 +1,13 @@
-# from gcpds.utils import loaddb
-from matplotlib import pyplot as plt
-import numpy as np
-from scipy.fftpack import fft, fftfreq, fftshift
-from scipy.signal import welch
-from datetime import datetime, timedelta
+from gcpds.filters.spatial.masker import generate_mask
+from gcpds.utils import loaddb
 
-# db = loaddb.BCI_CIV_2a('BCI2a_database')
-# db.load_subject(1)
-# data, _ = db.get_data()
-# fs = db.metadata['sampling_rate']
-# data.shape
 
-data = np.random.random(1000)
+db = 'HighGamma_ME'
+channels, montage_name = getattr(loaddb, db).metadata['channel_names'], getattr(
+    loaddb, db).metadata['montage']
 
-from gcpds.filters import frequency as flt
+print(f"Channels: {channels}")
+print(f"Montage: {montage_name}")
 
-flt.alpha(data, timestamp=[0, 15.2]).shape
+mask = generate_mask(channels, montage_name)
+print(f"Mask: \n{mask}")
