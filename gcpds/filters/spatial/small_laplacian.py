@@ -1,4 +1,4 @@
-def function_getMontage(montage):
+def function_getMontage(montage): 
     # Small laplacian
     # Calculates spatial filter matrix for Laplacian derivations.
     ##
