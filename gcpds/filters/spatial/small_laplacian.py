@@ -1,4 +1,4 @@
-def function_getMontage(montage): 
+def function_getMontage(montage):
     # Small laplacian
     # Calculates spatial filter matrix for Laplacian derivations.
     ##
@@ -40,8 +40,6 @@ def function_getMontage(montage):
     # Frank Y. Zapata C., Luisa F. Velasquez M.
     # Version 2020
     # ------------------------------------------------------------------------
-    # import numpy as np
-    # montage = '22ch'
     if isinstance(montage, str):  # Predefined layouts
         if montage == '16ch':
             temp = [[0, 0, 1, 0, 0],
