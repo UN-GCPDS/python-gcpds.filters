@@ -1,4 +1,3 @@
-
 def function_getMontage(database):
     # Small laplacian
     # Calculates spatial filter matrix for Laplacian derivations.
@@ -7,7 +6,7 @@ def function_getMontage(database):
     # well as indices used to plot in a topographical layout.
     # Assuming that the data vector s is of dimension <samples x channels>, the
     # Laplacian derivation s_lap can then be calculated by s_lap = s * lap.
-    # s = signal(channels x time).
+    # s = signal(trials x channels x time).
     ##
     # Usage:
     ##   [lap, plot_index, n_rows, n_cols] = getMontage(montage)
@@ -117,5 +116,5 @@ def function_getMontage(database):
     Data = database.get_data()
     for i,tr in enumerate(Data):
         Data[i] = tr.dot(lap)
-     
+
     return Data
