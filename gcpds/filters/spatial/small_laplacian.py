@@ -6,10 +6,8 @@
 # Version 2020
 # ------------------------------------------------------------------------
 
-
 from .masker import generate_mask
 import numpy as np
-
 
 def small_laplacian(data, channels, montage_name):
     """Small laplacian
