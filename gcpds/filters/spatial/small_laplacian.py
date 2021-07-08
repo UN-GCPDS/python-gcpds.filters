@@ -46,12 +46,8 @@ def small_laplacian(data, channels, montage_name):
     n_rows     , Number of rows of the montage
     n_cols     , Number of columns of the montage
     """
-
     montage = generate_mask(channels, montage_name)
     temp = montage
-    # plot_index = np.where(np.asarray(temp).T == 1)
-    # n_rows = np.size(np.asarray(temp), 0)
-    # n_cols = np.size(np.asarray(temp), 1)
 
     counter = 1
     temp = np.asarray(temp).T

@@ -1,19 +1,22 @@
 #  common average reference (CAR)
-def CAR(subjects):
-    SubjectsCAR = subjects
-    fil = len(subjects)
-    for l in range(0,fil): ## 9
-        subject = subjects[l,0]
-        fil = len(subject)
-        SubjectCAR = subject
-        for k in range(0, fil): ## 273
-            Sample = subject[k,0]
-            SampleCAR = Sample
-            prom = np.mean(Sample,1)
-            promedio = np.array(prom)
-            prom_one = npmat.repmat(promedio,22,1)
-            promedio = prom_one.T
-            SampleCAR = Sample - promedio
-            SubjectCAR[k,0] = SampleCAR ## Subject
-        SubjectsCAR[l,0] = SubjectCAR
-    return SubjectsCAR
+# ------------------------------------------------------------------------
+# Version python
+# Frank Y. Zapata C.
+# Version 2020
+# ------------------------------------------------------------------------
+import numpy as np
+
+def CAR(data):
+    """
+    The common average reference (CAR) was computed
+    according to the formula  V_i: V_i-1/n sum 1to n V_j"
+    where V_i is the potential between the ith electrode and the
+    reference, and n is the number of electrodes in the montage
+    (i.e. 64)
+    """
+    for i, tr in enumerate(data):
+      prom    = tr.mean(axis=0)
+      for ch in range(tr.shape[0]):
+        data[i] = tr[ch,:] - prom
+
+    return data

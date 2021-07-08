@@ -49,9 +49,6 @@ def large_laplacian(data, channels, montage_name):
 
     montage = generate_mask(channels, montage_name)
     temp = montage
-    # plot_index = np.where(np.asarray(temp).T == 1)
-    # n_rows = np.size(np.asarray(temp), 0)
-    # n_cols = np.size(np.asarray(temp), 1)
 
     counter = 1
     temp = np.asarray(temp).T
