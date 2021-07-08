@@ -84,7 +84,7 @@ def large_laplacian(data, channels, montage_name):
     for col, row in np.ndindex(lap.T.shape):
         if lap[row][col]:
             around = np.array(
-                [row + 1, row - 1, col + 1, col - 1], dtype=object)
+                [row + 2, row - 2, col + 2, col - 2], dtype=object)
             pair = np.array([col, col, row, row], dtype=object)
 
             around[around < 0] = None
