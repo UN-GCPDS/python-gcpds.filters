@@ -6,10 +6,8 @@
 # Version 2020
 # ------------------------------------------------------------------------
 
-
 from .masker import generate_mask
 import numpy as np
-
 
 def large_laplacian(data, channels, montage_name):
     """large laplacian
