@@ -1,1 +1,1 @@
-from .small_laplacian import small_laplacian,large_laplacian
+from .small_laplacian import small_laplacian
