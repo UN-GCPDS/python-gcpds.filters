@@ -59,7 +59,8 @@ class Masker:
     @staticmethod
     def get_sort_value(v):
         """"""
-        if match := re.findall('([0-9]+)', v):
+        match = re.findall('([0-9]+)', v)
+        if match:
             order = int(match[0])
             if int(order) % 2 != 0:
                 order = -order
