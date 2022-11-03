@@ -13,6 +13,7 @@ docs/source/notebooks/gcpds
 docs/source/notebooks/databases
 examples/gcpds
 
+/venv
 /logs
 /docs/build
 /test

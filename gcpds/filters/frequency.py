@@ -239,7 +239,70 @@ class GenericButterBand(Filter):
         """
 
         self.f0, self.f1, self.N = f0, f1, N
-        self._b, self._a = self._fit(fs)
+        try:
+            self._b, self._a = self._fit(fs)
+        except:
+            pass
+    # ----------------------------------------------------------------------
+
+    @lru_cache(maxsize=700)
+    def _fit(self, fs):
+        """Get the numerator and denominator of new sample frequency.
+
+        Parameters
+        ----------
+        fs : float, optional
+            The sampling frequency of the digital system.
+
+        Returns
+        -------
+        b, a : ndarray, ndarray
+            Numerator (`b`) and denominator (`a`) polynomials of the IIR filter.
+            Only returned if ``output='ba'``.
+        z, p, k : ndarray, ndarray, float
+            Zeros, poles, and system gain of the IIR filter transfer
+            function.  Only returned if ``output='zpk'``.
+        sos : ndarray
+            Second-order sections representation of the IIR filter.
+            Only returned if ``output=='sos'``.
+        """
+
+        if fs != DEFAULT_FS:
+            logging.info(
+                f"Compiled `Butter bandpass` filter ({self.f0}|{self.f1} Hz) for {fs:.2f} Hz")
+        nyq = fs / 2
+        return signal.butter(self.N, (self.f0 / nyq, self.f1 / nyq), 'bandpass')
+
+
+########################################################################
+class GenericButterLowPass(Filter):
+    """Generic bandpass"""
+
+    # ----------------------------------------------------------------------
+    # def __init__(self, / , f0, f1, fs , N=3):
+    def __init__(self, f0, fs=250, N=5):
+        """Butterworth digital and analog filter design.
+
+        Design an Nth-order digital or analog Butterworth filter and return
+        the filter coefficients.
+
+        Parameters
+        ----------
+        f0: float
+            Low cutoff frequency.
+        f1: float
+            Hight cutoff frequency.
+        fs: float
+            Sample frequency.
+        N : int
+            The order of the filter.
+        """
+
+        self.f0, self.N = f0, N
+        try:
+            self._b, self._a = self._fit(fs)
+        except:
+            pass
 
     # ----------------------------------------------------------------------
     @lru_cache(maxsize=700)
@@ -266,9 +329,69 @@ class GenericButterBand(Filter):
 
         if fs != DEFAULT_FS:
             logging.info(
-                f"Compiled `Butter` filter ({self.f0}|{self.f1} Hz) for {fs:.2f} Hz")
+                f"Compiled `Butter lowpass` filter ({self.f0} Hz) for {fs:.2f} Hz")
         nyq = fs / 2
-        return signal.butter(self.N, (self.f0 / nyq, self.f1 / nyq), 'bandpass')
+        return signal.butter(self.N, self.f0 / nyq, 'lowpass')
+
+
+########################################################################
+class GenericButterHighPass(Filter):
+    """Generic bandpass"""
+
+    # ----------------------------------------------------------------------
+    # def __init__(self, / , f0, f1, fs , N=3):
+    def __init__(self, f0, fs=250, N=5):
+        """Butterworth digital and analog filter design.
+
+        Design an Nth-order digital or analog Butterworth filter and return
+        the filter coefficients.
+
+        Parameters
+        ----------
+        f0: float
+            Low cutoff frequency.
+        f1: float
+            Hight cutoff frequency.
+        fs: float
+            Sample frequency.
+        N : int
+            The order of the filter.
+        """
+
+        self.f0, self.N = f0, N
+        try:
+            self._b, self._a = self._fit(fs)
+        except:
+            pass
+
+    # ----------------------------------------------------------------------
+    @lru_cache(maxsize=700)
+    def _fit(self, fs):
+        """Get the numerator and denominator of new sample frequency.
+
+        Parameters
+        ----------
+        fs : float, optional
+            The sampling frequency of the digital system.
+
+        Returns
+        -------
+        b, a : ndarray, ndarray
+            Numerator (`b`) and denominator (`a`) polynomials of the IIR filter.
+            Only returned if ``output='ba'``.
+        z, p, k : ndarray, ndarray, float
+            Zeros, poles, and system gain of the IIR filter transfer
+            function.  Only returned if ``output='zpk'``.
+        sos : ndarray
+            Second-order sections representation of the IIR filter.
+            Only returned if ``output=='sos'``.
+        """
+
+        if fs != DEFAULT_FS:
+            logging.info(
+                f"Compiled `Butter highpass` filter ({self.f0} Hz) for {fs:.2f} Hz")
+        nyq = fs / 2
+        return signal.butter(self.N, self.f0 / nyq, 'highpass')
 
 
 # ----------------------------------------------------------------------
