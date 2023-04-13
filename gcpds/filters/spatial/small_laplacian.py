@@ -2,7 +2,7 @@
 # Version matlab Toolbox Biosig
 # ------------------------------------------------------------------------
 # Version python
-# Frank Y. Zapata C., Luisa F. Velasquez M.
+# Frank Y. Zapata C.
 # Version 2020
 # ------------------------------------------------------------------------
 
